@@ -1,0 +1,139 @@
+@font-face { font-family: "Fredoka"; src: url("fonts/fredoka-latin-600-normal.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("fonts/nunito-latin-500-normal.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("fonts/nunito-latin-800-normal.ttf") format("truetype"); font-weight: 800; font-display: swap; }
+
+:root {
+  --bg: #fff8ee;
+  --card: #ffffff;
+  --text: #2b2320;
+  --muted: #6b5e57;
+  --accent: #1f5e5b;
+  --accent-soft: #e3efed;
+  --warm: #b8322f;
+  --gold: #f2b632;
+  --line: #eadfce;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 500 17px/1.6 "Nunito", system-ui, sans-serif;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--accent); }
+h1, h2, h3 { font-family: "Fredoka", "Nunito", sans-serif; font-weight: 600; line-height: 1.2; margin: 0 0 .5em; }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+/* Kopf */
+.site-header { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.logo { font-family: "Fredoka", sans-serif; font-size: 1.5rem; color: var(--text); text-decoration: none; }
+.logo span { color: var(--warm); }
+.site-header nav a { margin-left: 18px; text-decoration: none; font-weight: 800; }
+.site-header nav a:first-child { margin-left: 0; }
+
+/* Hero */
+.hero { padding: 56px 0 40px; text-align: center; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+.hero p { font-size: 1.15rem; color: var(--muted); max-width: 640px; margin: 0 auto; }
+
+/* Abschnitte */
+section { padding: 32px 0; }
+.section-title { font-size: 1.8rem; margin-bottom: .2em; }
+.section-sub { color: var(--muted); margin: 0 0 24px; }
+
+/* Gratis-Box */
+.freebie {
+  display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center;
+  background: var(--card); border: 2px dashed var(--warm); border-radius: var(--radius); padding: 24px;
+}
+.freebie img { border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+.freebie h3 { font-size: 1.5rem; }
+.badge { display: inline-block; background: var(--gold); color: var(--text); font-weight: 800; font-size: .8rem; letter-spacing: .05em; padding: 3px 10px; border-radius: 99px; margin-bottom: 8px; }
+.freebie ul { margin: 0 0 16px; padding-left: 20px; }
+
+/* Buttons */
+.btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 800; text-decoration: none; padding: 11px 20px; border-radius: 99px; }
+.btn:hover { filter: brightness(1.1); }
+.btn-soon { background: var(--accent-soft); color: var(--accent); cursor: default; }
+
+/* Buch-Karten */
+.category { margin-top: 36px; font-size: 1.3rem; color: var(--warm); }
+.books { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 24px; }
+.book { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; }
+.book .cover { aspect-ratio: 2 / 3; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.book .cover img { max-height: 100%; border-radius: 6px; box-shadow: 0 6px 16px rgba(0,0,0,.14); }
+.book h4 { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.15rem; margin: 0 0 4px; }
+.book .meta { color: var(--muted); font-size: .9rem; margin: 0 0 10px; }
+.book p { margin: 0 0 16px; font-size: .95rem; flex: 1; }
+.book .btn { align-self: flex-start; }
+
+/* Über */
+.about { background: var(--card); border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); }
+
+/* Rechtstexte */
+.legal { max-width: 760px; padding: 40px 16px; }
+.legal h1 { font-size: 2rem; }
+.legal h2 { font-size: 1.25rem; margin-top: 1.6em; }
+.legal address { font-style: normal; }
+
+/* Fuß */
+.site-footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 24px 0; color: var(--muted); font-size: .9rem; }
+.site-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.site-footer a { margin-left: 16px; }
+
+@media (max-width: 640px) {
+  .freebie { grid-template-columns: 1fr; text-align: center; }
+  .freebie img { max-width: 200px; margin: 0 auto; }
+  .freebie ul { text-align: left; }
+  .site-header nav a { margin-left: 12px; }
+}
+
+/* ===== Impressum ===== */
+.imp-page { background: #f4f8f7; }
+.imp-hero {
+  background: linear-gradient(160deg, #1f5e5b 0%, #174a48 100%);
+  color: #fff6e6; text-align: center; padding: 28px 0 64px; position: relative;
+}
+.imp-hero .wrap { display: flex; flex-direction: column; align-items: center; }
+.imp-back { align-self: flex-start; color: #fff6e6; text-decoration: none; font-weight: 800; font-size: .95rem; opacity: .85; }
+.imp-back:hover { opacity: 1; }
+.imp-logo { width: 120px; height: 120px; margin: 18px 0 14px; border-radius: 50%; box-shadow: 0 0 0 6px rgba(255,246,230,.18); }
+.imp-hero h1 { font-size: clamp(2.2rem, 6vw, 3rem); margin: 0 0 4px; }
+.imp-hero p { margin: 0; opacity: .9; }
+
+.imp-main { margin-top: -36px; padding-bottom: 20px; position: relative; z-index: 1; }
+.imp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.imp-card {
+  background: #fff; border-radius: 20px; padding: 24px;
+  box-shadow: 0 8px 24px rgba(23, 74, 72, .10);
+  display: flex; gap: 18px; align-items: flex-start;
+}
+.imp-card-wide { grid-column: 1 / -1; }
+.imp-card h2 { font-size: 1.1rem; color: #1f5e5b; margin: 2px 0 8px; }
+.imp-card p, .imp-card address { margin: 0 0 12px; font-style: normal; }
+.imp-card p:last-child, .imp-card address:last-child { margin-bottom: 0; }
+.imp-icon {
+  flex: 0 0 48px; height: 48px; border-radius: 14px; background: #e3efed; color: #1f5e5b;
+  display: flex; align-items: center; justify-content: center;
+}
+.imp-icon svg { width: 24px; height: 24px; fill: currentColor; }
+.imp-mail { font-weight: 800; word-break: break-all; }
+
+.imp-notes { background: #fff; border-radius: 20px; padding: 24px 28px; margin-top: 18px; border: 1px solid #dde9e7; }
+.imp-notes h2 { font-size: 1rem; color: #1f5e5b; margin: 1.2em 0 .3em; }
+.imp-notes h2:first-child { margin-top: 0; }
+.imp-notes p { margin: 0; color: #4a5a58; font-size: .95rem; }
+
+.imp-page .site-footer { border-top: 0; margin-top: 16px; }
+
+@media (max-width: 640px) {
+  .imp-grid { grid-template-columns: 1fr; }
+  .imp-card { padding: 20px; gap: 14px; }
+  .imp-icon { flex-basis: 40px; height: 40px; }
+}
