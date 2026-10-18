@@ -87,8 +87,8 @@ section { padding: 26px 0; }
 .book .cover { aspect-ratio: 2 / 3; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; background: var(--green-soft); border-radius: 14px; padding: 14px; }
 .book .cover img { max-height: 100%; border-radius: 4px; box-shadow: 0 6px 16px rgba(0,0,0,.18); }
 .book h4 { font-size: 1.15rem; margin: 0 0 4px; }
-.book .by { color: var(--green); font-weight: 800; font-size: .85rem; margin: 0 0 2px; }
-.book .meta { color: var(--muted); font-size: .9rem; margin: 0 0 10px; }
+.book .by { color: var(--green); font-weight: 800; font-size: .85rem; margin: 0 0 2px; flex: none; }
+.book .meta { color: var(--muted); font-size: .9rem; margin: 0 0 10px; flex: none; }
 .book p { margin: 0 0 16px; font-size: .95rem; flex: 1; }
 .book .btn { align-self: flex-start; }
 
