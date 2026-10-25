@@ -134,3 +134,20 @@ section { padding: 26px 0; }
   .text-card { padding: 22px 20px; }
   .topnav nav a { margin-left: 12px; }
 }
+
+/* Social-Links (TikTok, Pinterest) */
+.social { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+.social-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--cream); color: var(--green-dark); text-decoration: none;
+  font-weight: 800; font-size: 1.02rem; padding: 12px 22px; border-radius: 99px; box-shadow: 0 6px 18px rgba(0,0,0,.22); transition: transform .15s, background .15s; }
+.social-btn:hover { background: #fff; transform: translateY(-2px); }
+.social-btn svg { width: 20px; height: 20px; flex: none; }
+.social-btn.tiktok { background: var(--gold); color: #2b2100; }
+.social-btn.tiktok:hover { background: #f6c652; }
+.follow { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.follow-text { flex: 1 1 380px; }
+.follow-text p { margin: 0; color: var(--muted); }
+.follow-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.follow-links .btn { display: inline-flex; align-items: center; gap: 8px; }
+.follow-links svg { width: 18px; height: 18px; flex: none; }
+.btn-ghost { background: var(--green-soft); color: var(--green); }
+.btn-ghost:hover { background: #d3e6e3; }
