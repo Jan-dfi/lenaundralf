@@ -43,6 +43,7 @@
       r: (+img.getAttribute('width') || 2) / (+img.getAttribute('height') || 3),
       by: el.querySelector('.by').textContent.trim(), meta: (el.querySelector('.meta') || {}).textContent || '',
       text: ps.length ? ps[ps.length - 1].textContent.trim() : '', link: link ? link.href : '', fuer: el.dataset.fuer || '',
+      vorschau: +el.dataset.vorschau || 0, ordner: img.getAttribute('src').split('/').pop().split(/[.?]/)[0],
       facts: [...el.querySelectorAll('.facts > div')].map(d => [d.querySelector('dt').textContent, d.querySelector('dd').textContent]),
       slug: title.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
     });
@@ -151,10 +152,43 @@
     $('rmeta').textContent = b.meta; $('rtxt').textContent = b.text;
     $('rfacts').innerHTML = b.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
     $('rbtn').innerHTML = b.link ? `<a class="btn" href="${b.link}" target="_blank" rel="noopener">Bei Amazon ansehen →</a>` : '<span class="btn btn-soon">Bald erhältlich</span>';
+    showCover();
     reader.classList.add('open'); reader.setAttribute('aria-hidden', 'false'); history.replaceState(null, '', '#' + b.slug);
     $('close').focus({ preventScroll: true });
   }
+  // Blick ins Buch: die ersten Seiten durchblättern
+  let page = -1;
+  const card = reader.querySelector('.card');
+  function showCover() {
+    const b = BOOKS[current]; page = -1; card.classList.remove('big');
+    $('rcover').hidden = false; $('rview').hidden = true;
+    $('peek').hidden = !b.vorschau; $('peektxt').textContent = `Blick ins Buch · ${b.vorschau} Seiten`;
+  }
+  function showPage(k) {
+    const b = BOOKS[current]; page = k;
+    if ($('rview').hidden) {
+      $('rcover').hidden = true; $('rview').hidden = false;
+      for (let j = 1; j <= b.vorschau; j++) new Image().src = `vorschau/${b.ordner}/${j}.jpg`;
+    }
+    $('pimg').src = `vorschau/${b.ordner}/${k + 1}.jpg`; $('pimg').alt = `${b.title} – Leseprobe Seite ${k + 1}`;
+    $('pdots').innerHTML = Array.from({ length: b.vorschau }, (_, j) => `<i class="${j === k ? 'on' : ''}"></i>`).join('');
+    $('pprev').disabled = k === 0; $('pnext').disabled = k === b.vorschau - 1;
+  }
+  function turn(d) {
+    const b = BOOKS[current], k = page + d; if (page < 0 || k < 0 || k >= b.vorschau) return;
+    const im = $('pimg'); im.classList.add('out');
+    setTimeout(() => { showPage(k); im.classList.remove('out'); im.classList.add('in'); void im.offsetWidth; im.classList.remove('in'); }, 280);
+  }
+  $('peek').onclick = () => showPage(0);
+  $('pprev').onclick = () => turn(-1); $('pnext').onclick = () => turn(1);
+  $('pback').onclick = showCover;
+  $('rsheet').onclick = () => card.classList.toggle('big');
+  let x0 = null;
+  $('rsheet').addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  $('rsheet').addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) turn(dx < 0 ? 1 : -1); x0 = null; });
+
   function closeBook() {
+    card.classList.remove('big');
     reader.classList.remove('open'); reader.setAttribute('aria-hidden', 'true');
     const el = box.querySelector(`[data-i="${current}"]`); current = -1;
     history.replaceState(null, '', location.pathname + location.search); if (el) el.focus({ preventScroll: true });
@@ -162,7 +196,9 @@
   $('close').onclick = closeBook; reader.onclick = e => { if (e.target === reader) closeBook(); };
   addEventListener('keydown', e => {
     if (current < 0) return;
-    if (e.key === 'Escape') closeBook();
+    if (e.key === 'Escape') { if (card.classList.contains('big')) card.classList.remove('big'); else closeBook(); }
+    if (page >= 0 && e.key === 'ArrowRight') turn(1);
+    if (page >= 0 && e.key === 'ArrowLeft') turn(-1);
   });
 
   setSize(); render();

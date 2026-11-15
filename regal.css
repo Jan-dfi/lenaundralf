@@ -150,7 +150,7 @@ a { color: inherit; }
 .reader { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 18px; background: rgba(8,26,25,.72);
   backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity .3s; }
 .reader.open { opacity: 1; pointer-events: auto; }
-.card { position: relative; width: min(940px, 100%); max-height: calc(100vh - 36px); overflow: auto; display: grid; grid-template-columns: 380px 1fr; background: var(--cream);
+.card { position: relative; width: min(980px, 100%); max-height: calc(100vh - 36px); overflow: auto; display: grid; grid-template-columns: 420px 1fr; background: var(--cream);
   color: #1f2d2c; border-radius: 22px; box-shadow: 0 40px 90px rgba(0,0,0,.5); transform: translateY(30px) scale(.96); transition: transform .4s cubic-bezier(.2,1.2,.4,1); }
 .reader.open .card { transform: none; }
 .stage { perspective: 1400px; display: flex; align-items: center; justify-content: center; padding: 44px 24px; border-radius: 22px 0 0 22px;
@@ -178,11 +178,40 @@ a { color: inherit; }
 .close:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 .close { position: absolute; top: 12px; right: 14px; width: 38px; height: 38px; border-radius: 50%; border: 0; background: rgba(0,0,0,.07); font-size: 22px; color: #1f2d2c; }
 
+/* Blick ins Buch */
+.stage { flex-direction: column; }
+.cover-view { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.peek { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; padding: 10px 18px; background: #fff; color: var(--green-d);
+  font-weight: 800; font-size: 14px; box-shadow: 0 6px 16px rgba(0,0,0,.14); }
+.peek svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.peek[hidden], .viewer[hidden], .cover-view[hidden] { display: none; }
+.viewer { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+.sheet { height: 440px; display: flex; align-items: center; justify-content: center; perspective: 1600px; cursor: zoom-in; }
+.sheet img { display: block; max-height: 440px; max-width: 100%; border-radius: 2px 6px 6px 2px; background: #fff; box-shadow: 0 18px 30px rgba(0,0,0,.22);
+  transform-origin: left center; transition: transform .3s ease-in, opacity .3s; }
+.sheet img.out { transform: rotateY(-80deg); opacity: .2; }
+.sheet img.in { transform: rotateY(70deg); opacity: .3; transition: none; }
+.pnav { display: flex; align-items: center; gap: 14px; }
+.pnav button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.12); font-size: 20px; font-weight: 800; color: var(--green-d); }
+.pnav button:disabled { opacity: .35; cursor: default; }
+.dots { display: flex; gap: 6px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,.18); transition: .2s; }
+.dots i.on { background: var(--green); width: 20px; border-radius: 4px; }
+.back2 { border: 0; background: none; color: #56706d; font-weight: 800; font-size: 13px; text-decoration: underline; }
+.card.big { grid-template-columns: 1fr; width: min(820px, 100%); }
+.card.big .info { display: none; }
+.card.big .stage { border-radius: 22px; }
+.card.big .sheet { height: calc(100vh - 190px); cursor: zoom-out; }
+.card.big .sheet img { max-height: calc(100vh - 190px); }
+.close { z-index: 5; }
+
 @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
   .card { grid-template-columns: 1fr; }
   .stage { border-radius: 22px 22px 0 0; padding: 30px; }
   .book3d { width: 160px; }
+  .sheet { height: 340px; }
+  .sheet img { max-height: 340px; }
   .info { padding: 22px 22px 24px; }
   .info h2 { font-size: 25px; }
   .head, .case, .katalog, .about { padding-left: 12px; padding-right: 12px; }
