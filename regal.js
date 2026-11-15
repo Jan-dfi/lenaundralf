@@ -2,13 +2,7 @@
 (function () {
   document.documentElement.classList.add('js');
 
-  const ICON = {
-    ok: '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
-    soon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 1.5"/></svg>'
-  };
-  const KIDS = ['Advent & Winter', 'Ausmalen'];
-
-  // Deko in Grün, Gold und Creme: Bücherstapel, Pflanze, Laterne, Tasse
+  // Deko in Grün, Gold und Creme: Bücherstapel, Pflanze, Laterne, Tasse, Buchrücken
   const rad = d => d * Math.PI / 180;
   const DECO = [
     { w: 118, h: 84, svg: `<rect x="6" y="6" width="96" height="20" rx="3" fill="#f2b632"/><rect x="20" y="13" width="40" height="3.5" rx="2" fill="#fff6e6" opacity=".8"/>
@@ -26,7 +20,10 @@
       <rect x="28" y="74" width="8" height="22" rx="2" fill="#fff6e6"/><rect x="10" y="104" width="44" height="10" rx="3" fill="#f2b632"/>` },
     { w: 80, h: 70, svg: `<path d="M18 34 q-2 -10 4 -16 M30 30 q-2 -12 4 -18 M42 34 q-2 -10 4 -16" stroke="#cfe3df" stroke-width="2.5" fill="none" opacity=".55"/>
       <path d="M8 36h50v18a14 14 0 0 1-14 14H22A14 14 0 0 1 8 54z" fill="#fff6e6"/><path d="M58 42h6a8 8 0 0 1 0 16h-6" fill="none" stroke="#fff6e6" stroke-width="5"/>
-      <rect x="8" y="44" width="50" height="6" fill="#3f8a84"/>` }
+      <rect x="8" y="44" width="50" height="6" fill="#3f8a84"/>` },
+    { w: 124, h: 150, svg: [[0, 14, 118, '#e9dcc0'], [15, 18, 136, '#f2b632'], [34, 12, 108, '#3f8a84'], [47, 20, 144, '#c9784a'], [68, 14, 124, '#fff6e6']]
+        .map(([x, w, h, c]) => `<rect x="${x}" y="${150 - h}" width="${w}" height="${h}" rx="2" fill="${c}"/><rect x="${x}" y="${150 - h + 10}" width="${w}" height="3" fill="#000" opacity=".18"/><rect x="${x}" y="${150 - 16}" width="${w}" height="3" fill="#000" opacity=".18"/>`).join('')
+        + '<g transform="rotate(16 84 150)"><rect x="84" y="20" width="17" height="130" rx="2" fill="#2f7b76"/><rect x="84" y="31" width="17" height="3" fill="#000" opacity=".2"/><rect x="84" y="132" width="17" height="3" fill="#000" opacity=".2"/></g>' }
   ];
 
   // Bücher aus den Karten lesen
@@ -45,14 +42,15 @@
       i: BOOKS.length, cat: genre.name, title, img: img.getAttribute('src'),
       r: (+img.getAttribute('width') || 2) / (+img.getAttribute('height') || 3),
       by: el.querySelector('.by').textContent.trim(), meta: (el.querySelector('.meta') || {}).textContent || '',
-      text: ps.length ? ps[ps.length - 1].textContent.trim() : '', link: link ? link.href : '', neu: !!el.querySelector('.flag'),
+      text: ps.length ? ps[ps.length - 1].textContent.trim() : '', link: link ? link.href : '', fuer: el.dataset.fuer || '',
+      facts: [...el.querySelectorAll('.facts > div')].map(d => [d.querySelector('dt').textContent, d.querySelector('dd').textContent]),
       slug: title.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
     });
   });
 
   let filter = 'alle', query = '', big = false, list = [], current = -1;
   const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-  const match = b => (filter === 'alle' || b.by === filter || (filter === 'bald' && !b.link) || (filter === 'neu' && b.neu) || (filter === 'kinder' && KIDS.includes(b.cat)))
+  const match = b => (filter === 'alle' || b.by === filter || b.fuer === filter)
     && (!query || (b.title + ' ' + b.meta + ' ' + b.text + ' ' + b.cat).toLowerCase().includes(query));
 
   function lights(w, seed) {
@@ -71,40 +69,49 @@
     return `<svg class="deco" viewBox="0 0 ${D.w} ${D.h}" height="${h}" width="${Math.round(D.w * h / D.h)}" aria-hidden="true">${D.svg}</svg>`;
   }
   function bookHTML(b, delay) {
-    const badge = b.neu && b.link ? '<span class="badge new">NEU</span>'
-      : `<span class="badge ${b.link ? '' : 'soon'}" title="${b.link ? 'Bei Amazon erhältlich' : 'Erscheint bald'}">${b.link ? ICON.ok : ICON.soon}</span>`;
-    return `<button class="book-b" data-i="${b.i}" style="animation-delay:${delay}ms" aria-label="${esc(b.title)}">${badge}<img src="${b.img}" alt="Cover: ${esc(b.title)}" loading="lazy"><span class="tip">${esc(b.title)}</span></button>`;
+    return `<button class="book-b" data-i="${b.i}" style="animation-delay:${delay}ms" aria-label="${esc(b.title)}"><img src="${b.img}" alt="Cover: ${esc(b.title)}" loading="lazy"><span class="tip">${esc(b.title)}</span></button>`;
   }
 
   const box = document.getElementById('regal');
+  // Regalfächer: jede Rubrik eigene Böden, Bücher ohne Amazon-Link ins Regal „Bald erhältlich“
+  let n = 0, s = 0, decoN = 0;
+  function shelvesHTML(groups, ch, gap, inner) {
+    let html = '';
+    groups.forEach((g, gi) => {
+      const rows = []; let row = [], used = 0;
+      g.books.forEach(b => { const w = b.r * ch; if (row.length && used + w > inner) { rows.push({ row, used }); row = []; used = 0; } row.push(b); used += w + gap; });
+      rows.push({ row, used });
+      // Freien Platz im letzten Boden mit Deko füllen, Buchrücken zuerst
+      const last = rows[rows.length - 1];
+      for (let t = 0; t < 2; t++) {
+        const k = t === 0 ? 4 : (gi + decoN) % 4, w = DECO[k].w * ch / 200;
+        if (last.used + w <= inner && (t === 0 || last.row.length < 4)) { (gi + t) % 2 ? last.row.unshift({ deco: k }) : last.row.push({ deco: k }); last.used += w + gap; decoN++; }
+      }
+      rows.forEach(({ row }, ri) => {
+        html += `<div class="shelf"><div class="back" data-s="${s++}"><div class="items">${row.map(x => x.deco !== undefined ? decoHTML(x.deco, ch) : bookHTML(x, (n++) * 30)).join('')}</div></div>`
+          + `<div class="board"><div class="top"></div><div class="front">${ri === 0 && g.name ? `<span class="plate" title="${esc(g.desc)}">${esc(g.name)}</span>` : ''}</div></div></div>`;
+      });
+    });
+    return html;
+  }
+  const bookcase = (inner, cls = '') => `<div class="bookcase ${cls}"><div class="cornice"></div><div class="carcass">${inner}</div><div class="plinth"></div></div>`;
+
   function render() {
     list = BOOKS.filter(match);
     const ch = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ch')), m = innerWidth < 760;
     const gap = m ? 12 : 28; document.documentElement.style.setProperty('--gap', gap + 'px');
-    const shelfW = (box.clientWidth || innerWidth) - (m ? 24 : 44) - (m ? 14 : 20), inner = shelfW - (m ? 20 : 36);
-    let html = '', n = 0, s = 0, decoN = 0;
-    GENRES.forEach((g, gi) => {
-      const books = list.filter(b => b.cat === g.name); if (!books.length) return;
-      // Jedes Genre bekommt eigene Regalböden
-      const rows = []; let row = [], used = 0;
-      books.forEach(b => { const w = b.r * ch; if (row.length && used + w > inner) { rows.push({ row, used }); row = []; used = 0; } row.push(b); used += w + gap; });
-      rows.push({ row, used });
-      // Freien Platz im letzten Boden mit Deko füllen
-      const last = rows[rows.length - 1];
-      for (let t = 0; t < 2; t++) {
-        const k = (gi + decoN) % DECO.length, w = DECO[k].w * ch / 200;
-        if (last.used + w <= inner && (t === 0 || last.row.length < 3)) { gi % 2 ? last.row.unshift({ deco: k }) : last.row.push({ deco: k }); last.used += w + gap; decoN++; }
-      }
-      html += `<section class="genre" style="animation-delay:${gi * 60}ms"><header><h2>${esc(g.name)}</h2><p>${esc(g.desc)}</p></header><div class="cab">`;
-      rows.forEach(({ row }) => {
-        html += `<div class="shelf" data-s="${s++}"><div class="items">${row.map(x => x.deco !== undefined ? decoHTML(x.deco, ch) : bookHTML(x, (n++) * 30)).join('')}</div></div><div class="plank"></div>`;
-      });
-      html += '</div></section>';
-    });
-    box.innerHTML = (html ? `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="glow"><stop offset="0" stop-color="#ffe2a0" stop-opacity=".85"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient></defs></svg>` + html : '<p class="empty">Kein Buch gefunden.</p>');
+    const inner = (box.clientWidth || innerWidth) - (m ? 24 : 44) - (m ? 24 : 44) - (m ? 20 : 36);
+    n = 0; s = 0; decoN = 0;
+    const ready = GENRES.map(g => ({ name: g.name, desc: g.desc, books: list.filter(b => b.cat === g.name && b.link) })).filter(g => g.books.length);
+    const soon = list.filter(b => !b.link);
+    let html = '';
+    if (ready.length) html += `<div class="case-title"><h2>Unser Bücherregal</h2><p>Zum Stöbern einfach ein Buch anklicken.</p></div>` + bookcase(shelvesHTML(ready, ch, gap, inner));
+    if (soon.length) html += `<div class="case-title"><h2>Bald erhältlich</h2><p>Diese Bücher erscheinen in Kürze.</p></div>` + bookcase(shelvesHTML([{ name: '', desc: '', books: soon }], ch, gap, inner), 'soon');
+    box.innerHTML = html ? `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="glow"><stop offset="0" stop-color="#ffe2a0" stop-opacity=".85"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient></defs></svg>` + html
+      : '<p class="empty">Kein Buch gefunden.</p>';
     box.querySelectorAll('.book-b').forEach(el => el.onclick = () => openBook(+el.dataset.i));
     // Lichterketten erst nach dem Aufbau, damit die echte Breite stimmt
-    box.querySelectorAll('.shelf').forEach(sh => sh.insertAdjacentHTML('afterbegin', lights(Math.max(200, sh.clientWidth), +sh.dataset.s)));
+    box.querySelectorAll('.back').forEach(bk => bk.insertAdjacentHTML('afterbegin', lights(Math.max(200, bk.clientWidth), +bk.dataset.s)));
   }
 
   document.querySelectorAll('.pill[data-f]').forEach(p => p.onclick = () => {
@@ -123,12 +130,13 @@
 
   // Leseansicht
   const reader = document.getElementById('reader'), $ = id => document.getElementById(id);
-  const order = () => GENRES.flatMap(g => list.filter(x => x.cat === g.name));
+  const order = () => [...GENRES.flatMap(g => list.filter(x => x.cat === g.name && x.link)), ...list.filter(x => !x.link)];
   function openBook(i) {
     const b = BOOKS[i]; current = i; reader.classList.remove('open'); void reader.offsetWidth;
     $('rimg').src = b.img; $('rimg').alt = 'Cover: ' + b.title;
     $('rcat').textContent = b.cat; $('rtitle').textContent = b.title; $('rby').textContent = 'von ' + b.by;
     $('rmeta').textContent = b.meta; $('rtxt').textContent = b.text;
+    $('rfacts').innerHTML = b.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
     $('rbtn').innerHTML = b.link ? `<a class="btn" href="${b.link}" target="_blank" rel="noopener">Bei Amazon ansehen →</a>` : '<span class="btn btn-soon">Bald erhältlich</span>';
     const ord = order(), pos = ord.findIndex(x => x.i === i); $('rpos').textContent = `${pos + 1} / ${ord.length}`;
     reader.classList.add('open'); reader.setAttribute('aria-hidden', 'false'); history.replaceState(null, '', '#' + b.slug);
