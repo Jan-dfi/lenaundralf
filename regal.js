@@ -69,11 +69,23 @@
     return `<svg class="deco" viewBox="0 0 ${D.w} ${D.h}" height="${h}" width="${Math.round(D.w * h / D.h)}" aria-hidden="true">${D.svg}</svg>`;
   }
   function bookHTML(b, delay) {
-    return `<button class="book-b" data-i="${b.i}" style="animation-delay:${delay}ms" aria-label="${esc(b.title)}"><img src="${b.img}" alt="Cover: ${esc(b.title)}" loading="lazy"><span class="tip">${esc(b.title)}</span></button>`;
+    return `<button class="book-b" data-i="${b.i}" style="animation-delay:${delay}ms" aria-label="${esc(b.title)}"><img src="${b.img}" alt="Cover: ${esc(b.title)}" loading="lazy"></button>`;
   }
 
   const box = document.getElementById('regal');
-  // Regalfächer: jede Rubrik eigene Böden, Bücher ohne Amazon-Link ins Regal „Bald erhältlich“
+
+  // Buchtitel beim Darüberfahren: eigene Ebene über dem Regal, damit nichts davor liegt
+  const tip = document.createElement('div'); tip.className = 'tip'; tip.setAttribute('aria-hidden', 'true'); document.body.appendChild(tip);
+  function showTip(el) {
+    if (matchMedia('(hover: none)').matches) return;
+    tip.textContent = BOOKS[+el.dataset.i].title; tip.classList.add('show');
+    const r = el.getBoundingClientRect(), w = tip.offsetWidth;
+    tip.style.left = Math.min(innerWidth - w - 8, Math.max(8, r.left + r.width / 2 - w / 2)) + 'px';
+    tip.style.top = Math.max(8, r.top - tip.offsetHeight - 22) + 'px';
+  }
+  function hideTip() { tip.classList.remove('show'); }
+  addEventListener('scroll', hideTip, { passive: true });
+  // Regalfächer: jede Rubrik eigene Böden; Bücher ohne Amazon-Link werden (noch) nicht gezeigt
   let n = 0, s = 0, decoN = 0;
   function shelvesHTML(groups, ch, gap, inner) {
     let html = '';
@@ -103,13 +115,15 @@
     const inner = (box.clientWidth || innerWidth) - (m ? 24 : 44) - (m ? 24 : 44) - (m ? 20 : 36);
     n = 0; s = 0; decoN = 0;
     const ready = GENRES.map(g => ({ name: g.name, desc: g.desc, books: list.filter(b => b.cat === g.name && b.link) })).filter(g => g.books.length);
-    const soon = list.filter(b => !b.link);
     let html = '';
     if (ready.length) html += `<div class="case-title"><h2>Unser Bücherregal</h2><p>Zum Stöbern einfach ein Buch anklicken.</p></div>` + bookcase(shelvesHTML(ready, ch, gap, inner));
-    if (soon.length) html += `<div class="case-title"><h2>Bald erhältlich</h2><p>Diese Bücher erscheinen in Kürze.</p></div>` + bookcase(shelvesHTML([{ name: '', desc: '', books: soon }], ch, gap, inner), 'soon');
     box.innerHTML = html ? `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="glow"><stop offset="0" stop-color="#ffe2a0" stop-opacity=".85"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient></defs></svg>` + html
       : '<p class="empty">Kein Buch gefunden.</p>';
-    box.querySelectorAll('.book-b').forEach(el => el.onclick = () => openBook(+el.dataset.i));
+    box.querySelectorAll('.book-b').forEach(el => {
+      el.onclick = () => openBook(+el.dataset.i);
+      el.onmouseenter = el.onfocus = () => showTip(el);
+      el.onmouseleave = el.onblur = hideTip;
+    });
     // Lichterketten erst nach dem Aufbau, damit die echte Breite stimmt
     box.querySelectorAll('.back').forEach(bk => bk.insertAdjacentHTML('afterbegin', lights(Math.max(200, bk.clientWidth), +bk.dataset.s)));
   }
