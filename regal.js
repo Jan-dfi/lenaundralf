@@ -130,7 +130,6 @@
 
   // Leseansicht
   const reader = document.getElementById('reader'), $ = id => document.getElementById(id);
-  const order = () => [...GENRES.flatMap(g => list.filter(x => x.cat === g.name && x.link)), ...list.filter(x => !x.link)];
   function openBook(i) {
     const b = BOOKS[i]; current = i; reader.classList.remove('open'); void reader.offsetWidth;
     $('rimg').src = b.img; $('rimg').alt = 'Cover: ' + b.title;
@@ -138,23 +137,18 @@
     $('rmeta').textContent = b.meta; $('rtxt').textContent = b.text;
     $('rfacts').innerHTML = b.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
     $('rbtn').innerHTML = b.link ? `<a class="btn" href="${b.link}" target="_blank" rel="noopener">Bei Amazon ansehen →</a>` : '<span class="btn btn-soon">Bald erhältlich</span>';
-    const ord = order(), pos = ord.findIndex(x => x.i === i); $('rpos').textContent = `${pos + 1} / ${ord.length}`;
     reader.classList.add('open'); reader.setAttribute('aria-hidden', 'false'); history.replaceState(null, '', '#' + b.slug);
     $('close').focus({ preventScroll: true });
   }
-  function step(d) { const ord = order(), pos = ord.findIndex(x => x.i === current); openBook(ord[(pos + d + ord.length) % ord.length].i); }
   function closeBook() {
     reader.classList.remove('open'); reader.setAttribute('aria-hidden', 'true');
     const el = box.querySelector(`[data-i="${current}"]`); current = -1;
     history.replaceState(null, '', location.pathname + location.search); if (el) el.focus({ preventScroll: true });
   }
   $('close').onclick = closeBook; reader.onclick = e => { if (e.target === reader) closeBook(); };
-  $('prev').onclick = () => step(-1); $('next').onclick = () => step(1);
   addEventListener('keydown', e => {
     if (current < 0) return;
     if (e.key === 'Escape') closeBook();
-    if (e.key === 'ArrowRight') step(1);
-    if (e.key === 'ArrowLeft') step(-1);
   });
 
   setSize(); render();
