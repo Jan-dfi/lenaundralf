@@ -52,7 +52,7 @@
       "description": "24 Tage Rätselspaß · Enkel & Großeltern",
       "image": "https://xn--lena-jan-bcher-psb.de/img/advents-duell.jpg",
       "inLanguage": "de",
-      "url": "https://www.amazon.de/dp/ASIN"
+      "url": "https://www.amazon.de/dp/B0HM1RHVXY"
      }
     },
     {
@@ -301,66 +301,52 @@
 }
   </script>
   <link rel="icon" href="img/logo.png?v=2">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="regal.css?v=1">
+  <script>document.documentElement.classList.add('js')</script>
 
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="topnav">
-      <a href="./">Lena &amp; Jan</a>
-      <nav>
-        <a href="#buecher">Bücher</a>
-        <a href="#ueber">Über uns</a>
-      </nav>
-    </div>
-    <img class="hero-logo" src="img/logo.png?v=2" alt="Logo Lena &amp; Jan Bücher" width="120" height="120">
-    <h1>Lena &amp; Jan</h1>
-    <p>Bücher zum Rätseln, Mitmachen und Loslegen – für Kinder, Familien und alle, die einfach anfangen wollen.</p>
+<header class="head">
+  <div class="brand">
+    <a class="logo" href="./"><img src="img/logo.png?v=2" alt="Logo Lena &amp; Jan Bücher" width="58" height="58"><div><h1>Lena &amp; Jan <i>Bücher</i></h1><small>Bücher, die Spaß machen und weiterhelfen</small></div></a>
     <div class="social">
-      <a class="social-btn tiktok" href="https://www.tiktok.com/@lena_jan_buecher" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.8 5.8 0 0 0-.8-.1 5.7 5.7 0 1 0 5.7 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5z"/></svg>TikTok</a>
-      <a class="social-btn" href="https://de.pinterest.com/LenaJanBu/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.8 0 1.2.6 1.2 1.4 0 .9-.5 2.1-.8 3.3-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-1.9 3.1-4.6 0-2.4-1.7-4.1-4.2-4.1-2.9 0-4.5 2.2-4.5 4.4 0 .9.3 1.8.7 2.3.1.1.1.2.1.3l-.3 1.1c0 .2-.1.2-.3.1-1.2-.6-2-2.3-2-3.8 0-3.1 2.3-5.9 6.5-5.9 3.4 0 6 2.4 6 5.6 0 3.4-2.1 6.1-5.1 6.1-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.9-.8 2-1.2 2.6A10 10 0 1 0 12 2z"/></svg>Pinterest</a>
+      <a class="tt" href="https://www.tiktok.com/@lena_jan_buecher" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.8 5.8 0 0 0-.8-.1 5.7 5.7 0 1 0 5.7 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5z"/></svg>TikTok</a>
+      <a class="pi" href="https://de.pinterest.com/LenaJanBu/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.8 0 1.2.6 1.2 1.4 0 .9-.5 2.1-.8 3.3-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-1.9 3.1-4.6 0-2.4-1.7-4.1-4.2-4.1-2.9 0-4.5 2.2-4.5 4.4 0 .9.3 1.8.7 2.3.1.1.1.2.1.3l-.3 1.1c0 .2-.1.2-.3.1-1.2-.6-2-2.3-2-3.8 0-3.1 2.3-5.9 6.5-5.9 3.4 0 6 2.4 6 5.6 0 3.4-2.1 6.1-5.1 6.1-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.9-.8 2-1.2 2.6A10 10 0 1 0 12 2z"/></svg>Pinterest</a>
     </div>
   </div>
+  <nav class="pills" aria-label="Bücher filtern">
+    <button class="pill on" data-f="alle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Alle</button>
+    <button class="pill" data-f="Lena Lindner">Lena Lindner</button>
+    <button class="pill" data-f="Jan Hartmann">Jan Hartmann</button>
+    <button class="pill" data-f="kinder">Für Kinder</button>
+    <button class="pill" data-f="neu">Neu</button>
+    <button class="pill" data-f="bald"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bald erhältlich</button>
+  </nav>
 </header>
 
-<main class="wrap">
+<main>
 
-  <!-- ===== AUTOREN ===== -->
-  <div class="authors lift">
-    <div class="card author">
-      <div class="author-mono" aria-hidden="true">L</div>
-      <div>
-        <h2>Lena Lindner</h2>
-        <p>Rätsel- und Mitmachbücher für Kinder, Familien und Großeltern – und Ratgeber für Balkon und Hund.</p>
-        <div class="tags"><span class="tag">Advent</span><span class="tag">Winter</span><span class="tag">Ausmalen</span><span class="tag">Rätsel</span><span class="tag">Garten</span><span class="tag">Humor</span></div>
-      </div>
-    </div>
-    <div class="card author">
-      <div class="author-mono" aria-hidden="true">J</div>
-      <div>
-        <h2>Jan Hartmann</h2>
-        <p>Verständliche Ratgeber für den Alltag – ohne Fachchinesisch, Schritt für Schritt. Und ein Buch, das verrät, was Männer sich beim Dating eigentlich denken.</p>
-        <div class="tags"><span class="tag">Ratgeber</span><span class="tag">Beruf</span><span class="tag">Technik</span><span class="tag">Wohnen</span><span class="tag">Humor</span></div>
-      </div>
-    </div>
-  </div>
+  <!-- ===== REGAL (wird von regal.js aus den Buchkarten unten gebaut) ===== -->
+  <div class="case" id="regal"></div>
 
   <!-- ===== BÜCHER =====
-       Pro Buch eine <article class="book">.
-       Veröffentlicht:  <a class="btn" href="https://www.amazon.de/dp/ASIN" target="_blank" rel="noopener">Bei Amazon ansehen</a>
-       Noch nicht:      <span class="btn btn-soon">Bald erhältlich</span>
+       Pro Buch eine Buchkarte (article, Klasse "book") unter der passenden Rubrik (h3, Klasse "category").
+       Veröffentlicht:  a class="btn" mit href="https://www.amazon.de/dp/…"  – Text „Bei Amazon ansehen“
+       Noch nicht:      span class="btn btn-soon" – Text „Bald erhältlich“
+       Neu erschienen:  p class="flag" mit „Neu“ unter dem Titel (bekommt im Regal das goldene NEU-Schild)
+       Cover-Bilder mit width/height angeben (Seitenverhältnis fürs Regal).
+       Danach tools/website_jsonld.py ausführen.
   -->
-  <section id="buecher">
-    <h2 class="section-title">Unsere Bücher</h2>
-    <p class="section-sub">Alle Bücher gibt es als Taschenbuch bei Amazon – mit Leseprobe.</p>
+  <section id="buecher" class="katalog">
+    <h2 class="sr-only">Unsere Bücher</h2>
 
     <h3 class="category">Advent &amp; Winter</h3>
+    <p class="category-sub">Rätseln, Basteln und Vorlesen bis Heiligabend</p>
     <div class="books">
 
       <article class="book">
-        <div class="cover"><img src="img/advents-duell.jpg?v=2" alt="Cover: Das große Advents-Duell" loading="lazy"></div>
+        <div class="cover"><img src="img/advents-duell.jpg?v=2" alt="Cover: Das große Advents-Duell" width="600" height="600" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Das große Advents-Duell</h4>
         <p class="meta">24 Tage Rätselspaß · Enkel &amp; Großeltern</p>
@@ -369,7 +355,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/emil.jpg" alt="Cover: Emil und die verschwundenen Wunschzettel" loading="lazy"></div>
+        <div class="cover"><img src="img/emil.jpg" alt="Cover: Emil und die verschwundenen Wunschzettel" width="600" height="790" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Emil und die verschwundenen Wunschzettel</h4>
         <p class="meta">Adventsabenteuer · 5–7 Jahre</p>
@@ -378,7 +364,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/winterbuch.jpg" alt="Cover: Mein großes Winter-Mitmachbuch" loading="lazy"></div>
+        <div class="cover"><img src="img/winterbuch.jpg" alt="Cover: Mein großes Winter-Mitmachbuch" width="600" height="776" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Mein großes Winter-Mitmachbuch</h4>
         <p class="meta">Rätseln · Basteln · Backen · Entdecken · 6–10 Jahre</p>
@@ -389,10 +375,11 @@
     </div>
 
     <h3 class="category">Ausmalen</h3>
+    <p class="category-sub">Für kleine und große Künstler</p>
     <div class="books">
 
       <article class="book">
-        <div class="cover"><img src="img/weihnachts-malbuch.jpg" alt="Cover: Mein buntes Weihnachts-Malbuch" loading="lazy"></div>
+        <div class="cover"><img src="img/weihnachts-malbuch.jpg" alt="Cover: Mein buntes Weihnachts-Malbuch" width="541" height="700" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Mein buntes Weihnachts-Malbuch</h4>
         <p class="meta">60 Weihnachtsmotive · mit Farbvorlage · ab 3 Jahren</p>
@@ -401,7 +388,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/weiterzeichnen.jpg" alt="Cover: Ausmalen und Weiterzeichnen – Das Malbuch mit Funki dem Drachen" loading="lazy"></div>
+        <div class="cover"><img src="img/weiterzeichnen.jpg" alt="Cover: Ausmalen und Weiterzeichnen – Das Malbuch mit Funki dem Drachen" width="541" height="700" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Ausmalen und Weiterzeichnen</h4>
         <p class="meta">Das Malbuch mit Funki dem Drachen · ab 5 Jahren</p>
@@ -410,7 +397,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/berufe-ausmalbuch.jpg" alt="Cover: Wenn ich groß bin – Mein Berufe-Ausmalbuch" loading="lazy"></div>
+        <div class="cover"><img src="img/berufe-ausmalbuch.jpg" alt="Cover: Wenn ich groß bin – Mein Berufe-Ausmalbuch" width="600" height="776" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Wenn ich groß bin – Mein Berufe-Ausmalbuch</h4>
         <p class="meta">60 Berufe zum Ausmalen · ab 4 Jahren</p>
@@ -419,9 +406,10 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/kleine-auszeit.jpg" alt="Cover: Kleine Auszeit – Das Wohlfühl-Ausmalbuch für Erwachsene" loading="lazy"></div>
+        <div class="cover"><img src="img/kleine-auszeit.jpg" alt="Cover: Kleine Auszeit – Das Wohlfühl-Ausmalbuch für Erwachsene" width="541" height="700" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Kleine Auszeit</h4>
+        <p class="flag">Neu</p>
         <p class="meta">Das Wohlfühl-Ausmalbuch für Erwachsene</p>
         <p>40 filigrane Motive zum Entspannen: Blüten, Tiere in der Natur, gemütliche Rückzugsorte und Mandalas – einseitig bedruckt, im Großformat, mit Stiftetest und Farbpalette.</p>
         <a class="btn" href="https://www.amazon.de/dp/B0HRSPWF1Q" target="_blank" rel="noopener">Bei Amazon ansehen</a>
@@ -430,10 +418,11 @@
     </div>
 
     <h3 class="category">Rätsel &amp; Denksport</h3>
+    <p class="category-sub">Gedächtnistraining mit schönen Erinnerungen</p>
     <div class="books">
 
       <article class="book">
-        <div class="cover"><img src="img/senioren-raetsel.jpg" alt="Cover: Denksport &amp; Rätselspaß für Senioren im Großdruck" loading="lazy"></div>
+        <div class="cover"><img src="img/senioren-raetsel.jpg" alt="Cover: Denksport &amp; Rätselspaß für Senioren im Großdruck" width="541" height="700" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Denksport &amp; Rätselspaß für Senioren</h4>
         <p class="meta">Das große Nostalgie-Aktivitätsbuch · Großdruck</p>
@@ -444,10 +433,11 @@
     </div>
 
     <h3 class="category">Ratgeber</h3>
+    <p class="category-sub">Verständlich und Schritt für Schritt – für Beruf und Alltag</p>
     <div class="books">
 
       <article class="book">
-        <div class="cover"><img src="img/ki-fuer-einsteiger.jpg?v=2" alt="Cover: KI für Einsteiger" loading="lazy"></div>
+        <div class="cover"><img src="img/ki-fuer-einsteiger.jpg?v=2" alt="Cover: KI für Einsteiger" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>KI für Einsteiger</h4>
         <p class="meta">KI im Alltag – ChatGPT &amp; Co. sinnvoll nutzen</p>
@@ -456,7 +446,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/kleiner-wohnen-im-alter.jpg" alt="Cover: Kleiner wohnen im Alter" loading="lazy"></div>
+        <div class="cover"><img src="img/kleiner-wohnen-im-alter.jpg" alt="Cover: Kleiner wohnen im Alter" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Kleiner wohnen im Alter</h4>
         <p class="meta">Den Haushalt verkleinern, den Umzug planen und gut ankommen</p>
@@ -465,7 +455,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/balkon-ernte.jpg" alt="Cover: Balkon-Ernte" loading="lazy"></div>
+        <div class="cover"><img src="img/balkon-ernte.jpg" alt="Cover: Balkon-Ernte" width="600" height="900" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Balkon-Ernte</h4>
         <p class="meta">Anbauen, ernten, haltbar machen</p>
@@ -474,7 +464,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/welpenerziehung.jpg?v=2" alt="Cover: Welpenerziehung für Berufstätige" loading="lazy"></div>
+        <div class="cover"><img src="img/welpenerziehung.jpg?v=2" alt="Cover: Welpenerziehung für Berufstätige" width="600" height="900" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Welpenerziehung für Berufstätige</h4>
         <p class="meta">Der alltagstaugliche Fahrplan für Homeoffice &amp; Hybrid</p>
@@ -484,34 +474,37 @@
 
 
       <article class="book">
-        <div class="cover"><img src="img/haushaltsaufloesung.jpg" alt="Cover: Haushaltsauflösung und Erbe" loading="lazy"></div>
+        <div class="cover"><img src="img/haushaltsaufloesung.jpg" alt="Cover: Haushaltsauflösung und Erbe" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Haushaltsauflösung und Erbe</h4>
+        <p class="flag">Neu</p>
         <p class="meta">Schritt für Schritt durch den Nachlass</p>
         <p>Die Wohnung eines geliebten Menschen auflösen – ohne Überforderung und teure Fristversäumnisse: von den ersten 72 Stunden über Fristen und Erbrecht bis zur Wohnungsübergabe, mit Checklisten und Vorlagen.</p>
         <a class="btn" href="https://www.amazon.de/dp/B0HQ5CWDXD" target="_blank" rel="noopener">Bei Amazon ansehen</a>
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/fahrradpendeln.jpg" alt="Cover: Dein Arbeitsweg auf zwei Rädern" loading="lazy"></div>
+        <div class="cover"><img src="img/fahrradpendeln.jpg" alt="Cover: Dein Arbeitsweg auf zwei Rädern" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Dein Arbeitsweg auf zwei Rädern</h4>
+        <p class="flag">Neu</p>
         <p class="meta">Fahrradpendeln in vier Wochen ausprobieren</p>
         <p>Mit dem Rad zur Arbeit, aber wo anfangen? In vier flexiblen Wochen von der Idee zur eigenen Routine – mit dem Rad, das du schon hast: Route, Kleidung, Tasche, Ankommen im Büro und Plan B.</p>
         <a class="btn" href="https://www.amazon.de/dp/B0HQY4ZCF3" target="_blank" rel="noopener">Bei Amazon ansehen</a>
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/adhs-beruf.jpg" alt="Cover: ADHS im Berufsalltag" loading="lazy"></div>
+        <div class="cover"><img src="img/adhs-beruf.jpg" alt="Cover: ADHS im Berufsalltag" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>ADHS im Berufsalltag</h4>
+        <p class="flag">Neu</p>
         <p class="meta">Ratgeber für Erwachsene</p>
         <p>Mit Struktur, Fokus und den richtigen Gesprächen im Job ankommen.</p>
         <a class="btn" href="https://www.amazon.de/dp/B0HQKC95LQ" target="_blank" rel="noopener">Bei Amazon ansehen</a>
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/bauabnahme.jpg" alt="Cover: Die Bauabnahme für Bauherren" loading="lazy"></div>
+        <div class="cover"><img src="img/bauabnahme.jpg" alt="Cover: Die Bauabnahme für Bauherren" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Die Bauabnahme für Bauherren</h4>
         <p class="meta">Praxis-Ratgeber für Bauherren</p>
@@ -520,7 +513,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/kollegen-zum-chef.jpg" alt="Cover: Vom Kollegen zum Chef" loading="lazy"></div>
+        <div class="cover"><img src="img/kollegen-zum-chef.jpg" alt="Cover: Vom Kollegen zum Chef" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Vom Kollegen zum Chef</h4>
         <p class="meta">Der 90-Tage-Fahrplan für neue Führungskräfte</p>
@@ -529,7 +522,7 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/trauerrede.jpg" alt="Cover: Abschied in deinen Worten" loading="lazy"></div>
+        <div class="cover"><img src="img/trauerrede.jpg" alt="Cover: Abschied in deinen Worten" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Abschied in deinen Worten</h4>
         <p class="meta">Die Trauerrede für Vater oder Mutter</p>
@@ -537,7 +530,7 @@
         <span class="btn btn-soon">Bald erhältlich</span>
       </article>
       <article class="book">
-        <div class="cover"><img src="img/schichtdienst.jpg" alt="Cover: Der Schichtdienst-Kompass" loading="lazy"></div>
+        <div class="cover"><img src="img/schichtdienst.jpg" alt="Cover: Der Schichtdienst-Kompass" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Der Schichtdienst-Kompass</h4>
         <p class="meta">Das Praxis-Handbuch für Wechselschicht</p>
@@ -548,10 +541,11 @@
     </div>
 
     <h3 class="category">Humor</h3>
+    <p class="category-sub">Mit einem Augenzwinkern über Männer und Frauen</p>
     <div class="books">
 
       <article class="book">
-        <div class="cover"><img src="img/maedels.jpg" alt="Cover: Mädels, so einen kennt ihr auch" loading="lazy"></div>
+        <div class="cover"><img src="img/maedels.jpg" alt="Cover: Mädels, so einen kennt ihr auch" width="600" height="900" loading="lazy"></div>
         <p class="by">Lena Lindner</p>
         <h4>Mädels, so einen kennt ihr auch</h4>
         <p class="meta">Zum Schmunzeln und Weiterreichen</p>
@@ -560,9 +554,10 @@
       </article>
 
       <article class="book">
-        <div class="cover"><img src="img/was-er-sich-dabei-denkt.jpg" alt="Cover: Was er sich dabei denkt" loading="lazy"></div>
+        <div class="cover"><img src="img/was-er-sich-dabei-denkt.jpg" alt="Cover: Was er sich dabei denkt" width="600" height="900" loading="lazy"></div>
         <p class="by">Jan Hartmann</p>
         <h4>Was er sich dabei denkt</h4>
+        <p class="flag">Neu</p>
         <p class="meta">Der Männer-Übersetzer fürs Dating</p>
         <p>Er schreibt „Na, alles gut?“ und hat vorher sieben Minuten über ein Ausrufezeichen nachgedacht. Ein Mann öffnet die Tür zu seinem Kopf – zum Lachen, Wiedererkennen und Weiterreichen.</p>
         <a class="btn" href="https://www.amazon.de/dp/B0HQYCDXCW" target="_blank" rel="noopener">Bei Amazon ansehen</a>
@@ -572,35 +567,49 @@
   </section>
 
   <!-- ===== ÜBER UNS ===== -->
-  <section id="folgen">
-    <div class="card follow">
-      <div class="follow-text">
-        <h2 class="section-title">Blick in die Bücher</h2>
-        <p>Auf TikTok blättern wir durch unsere Bücher, zeigen Seiten zum Mitraten und Ideen für Advent, Winter und Alltag. Auf Pinterest gibt es dazu Pinnwände voller Ideen.</p>
-      </div>
-      <div class="follow-links">
-        <a class="btn" href="https://www.tiktok.com/@lena_jan_buecher" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.8 5.8 0 0 0-.8-.1 5.7 5.7 0 1 0 5.7 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5z"/></svg>Auf TikTok folgen</a>
-        <a class="btn btn-ghost" href="https://de.pinterest.com/LenaJanBu/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.8 0 1.2.6 1.2 1.4 0 .9-.5 2.1-.8 3.3-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-1.9 3.1-4.6 0-2.4-1.7-4.1-4.2-4.1-2.9 0-4.5 2.2-4.5 4.4 0 .9.3 1.8.7 2.3.1.1.1.2.1.3l-.3 1.1c0 .2-.1.2-.3.1-1.2-.6-2-2.3-2-3.8 0-3.1 2.3-5.9 6.5-5.9 3.4 0 6 2.4 6 5.6 0 3.4-2.1 6.1-5.1 6.1-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.9-.8 2-1.2 2.6A10 10 0 1 0 12 2z"/></svg>Pinterest ansehen</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="ueber">
-    <div class="card about">
-      <h2 class="section-title">Über uns</h2>
+  <section class="about" id="ueber">
+    <div>
+      <h2>Über uns</h2>
       <p>Wir schreiben Bücher, die man nicht nur liest, sondern benutzt: zum Rätseln mit den Enkeln, zum Basteln an Schneetagen, zum Planen des ersten Balkonbeets oder für den ersten Chat mit einer KI.</p>
-      <p>Fragen oder Wünsche? Die Kontaktdaten stehen im <a href="impressum.html">Impressum</a>.</p>
+      <p>Auf <a href="https://www.tiktok.com/@lena_jan_buecher" target="_blank" rel="noopener">TikTok</a> blättern wir durch unsere Bücher, auf <a href="https://de.pinterest.com/LenaJanBu/" target="_blank" rel="noopener">Pinterest</a> gibt es Pinnwände voller Ideen. Fragen oder Wünsche? Die Kontaktdaten stehen im <a href="impressum.html">Impressum</a>.</p>
+    </div>
+    <div>
+      <div class="mono" aria-hidden="true">L</div>
+      <h3>Lena Lindner</h3>
+      <p>Rätsel- und Mitmachbücher für Kinder, Familien und Großeltern – und Ratgeber für Balkon und Hund.</p>
+      <div class="tags"><span>Advent</span><span>Winter</span><span>Ausmalen</span><span>Rätsel</span><span>Garten</span><span>Humor</span></div>
+    </div>
+    <div>
+      <div class="mono" aria-hidden="true">J</div>
+      <h3>Jan Hartmann</h3>
+      <p>Verständliche Ratgeber für den Alltag – ohne Fachchinesisch, Schritt für Schritt. Und ein Buch, das verrät, was Männer sich beim Dating eigentlich denken.</p>
+      <div class="tags"><span>Ratgeber</span><span>Beruf</span><span>Technik</span><span>Wohnen</span><span>Humor</span></div>
     </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">
-    <span>© 2026 Lena &amp; Jan Bücher</span>
-    <span><a href="https://www.tiktok.com/@lena_jan_buecher" target="_blank" rel="noopener">TikTok</a><a href="https://de.pinterest.com/LenaJanBu/" target="_blank" rel="noopener">Pinterest</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span>
-  </div>
+  <span>© 2026 Lena &amp; Jan Bücher</span>
+  <nav aria-label="Rechtliches und Kanäle"><a href="https://www.tiktok.com/@lena_jan_buecher" target="_blank" rel="noopener">TikTok</a><a href="https://de.pinterest.com/LenaJanBu/" target="_blank" rel="noopener">Pinterest</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
 </footer>
 
+<button class="fab" id="fabZoom" title="Größere Cover" aria-label="Größere Cover"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></button>
+<input class="search" id="q" type="search" placeholder="Titel oder Thema suchen …" aria-label="Bücher durchsuchen">
+<button class="fab" id="fabSearch" title="Suchen" aria-label="Suchen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg></button>
+
+<div class="reader" id="reader" aria-hidden="true">
+  <article class="card" role="dialog" aria-modal="true" aria-labelledby="rtitle">
+    <button class="close" id="close" aria-label="Schließen">×</button>
+    <div class="stage"><div class="book3d"><img id="rimg" alt=""><div class="pages"></div></div></div>
+    <div class="info">
+      <div class="kick" id="rcat"></div><h2 id="rtitle"></h2><div class="by" id="rby"></div>
+      <div class="meta" id="rmeta"></div><p class="txt" id="rtxt"></p><div id="rbtn"></div>
+      <div class="nav"><button id="prev">← Vorheriges</button><span id="rpos"></span><button id="next">Nächstes →</button></div>
+    </div>
+  </article>
+</div>
+
+<script src="regal.js?v=1"></script>
 </body>
 </html>
